@@ -9,7 +9,7 @@
 import Foundation
 
 // TSNPeerNetworkingDelegate protocol.
-protocol TSNPeerNetworkingDelegate: class
+public protocol TSNPeerNetworkingDelegate: class
 {
     // Notifies the delegate that peers changed.
     func peerNetworkingPeersChanged(peerNetworking: TSNPeerNetworking)

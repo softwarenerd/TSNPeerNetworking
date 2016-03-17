@@ -10,10 +10,10 @@ import Foundation
 import MultipeerConnectivity
 
 // TSNPeerNetworking class.
-class TSNPeerNetworking: NSObject
+public class TSNPeerNetworking: NSObject
 {
     // The TSNPeerNetworkingDelegate.
-    weak var delegate: TSNPeerNetworkingDelegate?
+    public weak var delegate: TSNPeerNetworkingDelegate?
 
     // The local peer ID key.
     let LocalPeerIDKey = "LocalPeerIDKey"
@@ -39,7 +39,7 @@ class TSNPeerNetworking: NSObject
     private var nearbyServiceBrowser: MCNearbyServiceBrowser!
 
     // Returns a value which indicates whether peers are connected.
-    var peersAreConnected: Bool
+    public var peersAreConnected: Bool
     {
         get
         {
@@ -48,7 +48,7 @@ class TSNPeerNetworking: NSObject
     }
 
     // Initializer.
-    init(advertiseServiceType advertiseServiceTypeIn: String?, browseServiceType browseServiceTypeIn: String?)
+    public init(advertiseServiceType advertiseServiceTypeIn: String?, browseServiceType browseServiceTypeIn: String?)
     {
         // Initialize.
         advertiseServiceType = advertiseServiceTypeIn
@@ -56,7 +56,7 @@ class TSNPeerNetworking: NSObject
     }
     
     // Starts.
-    func start()
+    public func start()
     {
         // Obtain user defaults and see if we have a serialized local peer ID. If we do, deserialize it. If not, make one
         // and serialize it for later use. If we don't serialize and reuse the local peer ID, we'll see duplicates
@@ -110,7 +110,7 @@ class TSNPeerNetworking: NSObject
     }
     
     // Stops peer networking.
-    func stop()
+    public func stop()
     {
         // Stop advertising the local peer and browsing for nearby peers.
         nearbyServiceAdvertiser?.stopAdvertisingPeer()
@@ -130,7 +130,7 @@ class TSNPeerNetworking: NSObject
     }
     
     // Sends data.
-    func sendData(data: NSData) -> Bool
+    public func sendData(data: NSData) -> Bool
     {
         // If there are no connected peers, we cannot send the data.
         let connectedPeers = session.connectedPeers
@@ -169,7 +169,7 @@ extension TSNPeerNetworking: MCNearbyServiceAdvertiserDelegate
 {
     // Incoming invitation request.  Call the invitationHandler block with true
     // and a valid session to connect the inviting peer to the session.
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void)
+    public func advertiser(advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: NSData?, invitationHandler: (Bool, MCSession) -> Void)
     {
         // Accept the invitation.
         invitationHandler(true, session);
@@ -179,7 +179,7 @@ extension TSNPeerNetworking: MCNearbyServiceAdvertiserDelegate
     }
     
     // Advertising did not start due to an error.
-    func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError)
+    public func advertiser(advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: NSError)
     {
         log("Failed to start advertising. Error: \(error)")
     }
@@ -189,7 +189,7 @@ extension TSNPeerNetworking: MCNearbyServiceAdvertiserDelegate
 extension TSNPeerNetworking: MCNearbyServiceBrowserDelegate
 {
     // Found a nearby advertising peer.
-    func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
+    public func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
     {
         // Invite the peer to the session.
         nearbyServiceBrowser.invitePeer(peerID, toSession: session, withContext: nil, timeout: 30.0)
@@ -199,13 +199,13 @@ extension TSNPeerNetworking: MCNearbyServiceBrowserDelegate
     }
     
     // A nearby peer has stopped advertising.
-    func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
+    public func browser(browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID)
     {
         log("Lost peer \(peerID.displayName).")
     }
     
     // Browsing did not start due to an error.
-    func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError)
+    public func browser(browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: NSError)
     {
         log("Failed to start browsing for peers with service type \(browseServiceType). Error: \(error)")
     }
@@ -215,7 +215,7 @@ extension TSNPeerNetworking: MCNearbyServiceBrowserDelegate
 extension TSNPeerNetworking: MCSessionDelegate
 {
     // Nearby peer changed state.
-    func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState)
+    public func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState)
     {
         // Log.
         switch state
@@ -238,7 +238,7 @@ extension TSNPeerNetworking: MCSessionDelegate
     }
     
     // Received data from nearby peer.
-    func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID)
+    public func session(session: MCSession, didReceiveData data: NSData, fromPeer peerID: MCPeerID)
     {
         // Log.
         log("Peer \(peerID.displayName) sent \(data.length) bytes.")
@@ -251,23 +251,23 @@ extension TSNPeerNetworking: MCSessionDelegate
     }
     
     // Received a byte stream from nearby peer.
-    func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID)
+    public func session(session: MCSession, didReceiveStream stream: NSInputStream, withName streamName: String, fromPeer peerID: MCPeerID)
     {
     }
     
     // Start receiving a resource from nearby peer.
-    func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress)
+    public func session(session: MCSession, didStartReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, withProgress progress: NSProgress)
     {
     }
     
     // Finished receiving a resource from nearby peer and saved the content in a temporary location - the app is responsible for moving the file
     // to a permanent location within its sandbox.
-    func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?)
+    public func session(session: MCSession, didFinishReceivingResourceWithName resourceName: String, fromPeer peerID: MCPeerID, atURL localURL: NSURL, withError error: NSError?)
     {
     }
     
     // Made first contact with peer and have identity information about the nearby peer (certificate may be nil).
-    func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void)
+    public func session(session: MCSession, didReceiveCertificate certificate: [AnyObject]?, fromPeer peerID: MCPeerID, certificateHandler: (Bool) -> Void)
     {
         certificateHandler(true);
         log("Peer \(peerID.displayName) sent certificate and it was accepted.");
