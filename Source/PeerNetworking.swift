@@ -1,6 +1,6 @@
 //
-//  PeerNetworking.swift
-//  Overlord
+//  TSNPeerNetworking.swift
+//  TSNPeerNetworking
 //
 //  Created by Brian Lambert on 1/27/16.
 //  Copyright © 2016 Microsoft. All rights reserved.
@@ -9,11 +9,11 @@
 import Foundation
 import MultipeerConnectivity
 
-// Peer networking class.
-class PeerNetworking: NSObject
+// TSNPeerNetworking class.
+class TSNPeerNetworking: NSObject
 {
-    // The PeerNetworkingDelegate.
-    weak var delegate: PeerNetworkingDelegate?
+    // The TSNPeerNetworkingDelegate.
+    weak var delegate: TSNPeerNetworkingDelegate?
 
     // The local peer ID key.
     let LocalPeerIDKey = "LocalPeerIDKey"
@@ -165,7 +165,7 @@ class PeerNetworking: NSObject
 }
 
 // MCNearbyServiceAdvertiserDelegate.
-extension PeerNetworking: MCNearbyServiceAdvertiserDelegate
+extension TSNPeerNetworking: MCNearbyServiceAdvertiserDelegate
 {
     // Incoming invitation request.  Call the invitationHandler block with true
     // and a valid session to connect the inviting peer to the session.
@@ -186,7 +186,7 @@ extension PeerNetworking: MCNearbyServiceAdvertiserDelegate
 }
 
 // MCSessionDelegate.
-extension PeerNetworking: MCNearbyServiceBrowserDelegate
+extension TSNPeerNetworking: MCNearbyServiceBrowserDelegate
 {
     // Found a nearby advertising peer.
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String: String]?)
@@ -212,7 +212,7 @@ extension PeerNetworking: MCNearbyServiceBrowserDelegate
 }
 
 // MCSessionDelegate.
-extension PeerNetworking: MCSessionDelegate
+extension TSNPeerNetworking: MCSessionDelegate
 {
     // Nearby peer changed state.
     func session(session: MCSession, peer peerID: MCPeerID, didChangeState state: MCSessionState)
@@ -275,11 +275,11 @@ extension PeerNetworking: MCSessionDelegate
 }
 
 // Privates.
-extension PeerNetworking
+extension TSNPeerNetworking
 {
     // Log.
     private func log(string: String)
     {
-        print("PeerNetworking: \(localPeerDisplayName) - \(string)")
+        print("TSNPeerNetworking: \(localPeerDisplayName) - \(string)")
     }
 }

@@ -1,6 +1,6 @@
 //
-//  PeerNetworkingDelegate.swift
-//  Overlord
+//  TSNPeerNetworkingDelegate.swift
+//  TSNPeerNetworking
 //
 //  Created by Brian Lambert on 1/27/16.
 //  Copyright © 2016 Microsoft. All rights reserved.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-// PeerNetworkingDelegate protocol.
-protocol PeerNetworkingDelegate: class
+// TSNPeerNetworkingDelegate protocol.
+protocol TSNPeerNetworkingDelegate: class
 {
     // Notifies the delegate that peers changed.
     func peerNetworkingPeersChanged(peerNetworking: PeerNetworking)
