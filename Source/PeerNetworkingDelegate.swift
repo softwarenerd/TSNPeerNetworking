@@ -12,8 +12,8 @@ import Foundation
 protocol TSNPeerNetworkingDelegate: class
 {
     // Notifies the delegate that peers changed.
-    func peerNetworkingPeersChanged(peerNetworking: PeerNetworking)
+    func peerNetworkingPeersChanged(peerNetworking: TSNPeerNetworking)
     
     // Notifies the delegate that data was received.
-    func peerNetworking(peerNetworking: PeerNetworking, didReceiveData data: NSData)
+    func peerNetworking(peerNetworking: TSNPeerNetworking, didReceiveData data: NSData)
 }
